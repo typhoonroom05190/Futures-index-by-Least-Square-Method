@@ -110,10 +110,15 @@ share_price = []
 discriminate = ['賣出']
 index = [0,0,0]
 
+sheet = wb['Sheet']
+sheet['A1'] = '日期'
+sheet['B1'] = '收盤價'
+sheet['C1'] = '預測價'
+sheet['D1'] = '判定'
+
 for t in total:
     date, data = Check_monthly_closing_price(t[0],t[1])
-    sheet = wb['Sheet']
-    x = sheet.max_row
+    x = sheet.max_row + 1
     for d in date:
         share_price.append(float(data[d.get_text()]))
         sheet['A'+str(x)] = d.get_text()
