@@ -43,8 +43,6 @@ def Start_yy_mm(year,month):
         matrix.append([str(year),str(month)])
     return matrix
     
-
-
 name = input('請輸入你的檔案名稱:')
 try:
     wb = openpyxl.load_workbook(name + '.xlsx')
@@ -104,13 +102,13 @@ if establish:
                 sheet['C'+str(x)] = int(Least_square_method(share_price))
                 sheet['D'+str(x)] = int(data[d]) - int(Least_square_method(share_price))
                 index.append(int(data[d]) - int(Least_square_method(share_price)))
-                if (index[-2] < 0 < index[-1] or 0 < index[-2] < index[-1]) or (index[-3] < 0 and index[-2] < index[-1] and -30 < index[-1] < 0):
+                if (index[-2] < 0 < index[-1] or 0 <= index[-2] < index[-1]) or (index[-3] < 0 and index[-2] < index[-1] and -30 < index[-1] <= 0):
                     if discriminate[-1] == '買進':
                         pass
                     else:
                         sheet['E'+str(x)] = '買進'
                         discriminate.append('買進')
-                elif (index[-2] > 0 > index[-1] or 0 > index[-2] > index[-1]) or (index[-3] > 0 and index[-2] > index[-1] and 0 < index[-1] < 30):
+                elif (index[-2] > 0 > index[-1] or 0 >= index[-2] > index[-1]) or (index[-3] > 0 and index[-2] > index[-1] and 0 <= index[-1] < 30):
                     if discriminate[-1] == '賣出':
                         pass
                     else:
@@ -163,13 +161,13 @@ else:
                 sheet['C'+str(x)] = int(Least_square_method(share_price))
                 sheet['D'+str(x)] = int(data[d]) - int(Least_square_method(share_price))
                 index.append(int(data[d]) - int(Least_square_method(share_price)))
-                if (index[-2] < 0 < index[-1] or 0 < index[-2] < index[-1]) or (index[-3] < 0 and index[-2] < index[-1] and -30 < index[-1] < 0):
+                if (index[-2] < 0 < index[-1] or 0 <= index[-2] < index[-1]) or (index[-3] < 0 and index[-2] < index[-1] and -30 < index[-1] <= 0):
                     if discriminate[-1] == '買進':
                         pass
                     else:
                         sheet['E'+str(x)] = '買進'
                         discriminate.append('買進')
-                elif (index[-2] > 0 > index[-1] or 0 > index[-2] > index[-1]) or (index[-3] > 0 and index[-2] > index[-1] and 0 < index[-1] < 30):
+                elif (index[-2] > 0 > index[-1] or 0 >= index[-2] > index[-1]) or (index[-3] > 0 and index[-2] > index[-1] and 0 <= index[-1] < 30):
                     if discriminate[-1] == '賣出':
                         pass
                     else:
@@ -177,7 +175,6 @@ else:
                         discriminate.append('賣出')
             x += 1
         wb.save(name + '.xlsx')
-
 
 df = pd.read_excel(name + '.xlsx')
 response = input('最新的日期為' + df.loc[len(df)-1]['日期'] + '，請問是否需要手動輸入:')
@@ -205,13 +202,13 @@ if response == 'yes':
     sheet['C'+str(x)] = int(Least_square_method(share_price))
     sheet['D'+str(x)] = price - int(Least_square_method(share_price))
     index.append(price - int(Least_square_method(share_price)))
-    if (index[-2] < 0 < index[-1] or 0 < index[-2] < index[-1]) or (index[-3] < 0 and index[-2] < index[-1] and -30 < index[-1] < 0):
+    if (index[-2] < 0 < index[-1] or 0 <= index[-2] < index[-1]) or (index[-3] < 0 and index[-2] < index[-1] and -30 < index[-1] <= 0):
         if discriminate[-1] == '買進':
             pass
         else:
             sheet['E'+str(x)] = '買進'
             discriminate.append('買進')
-    elif (index[-2] > 0 > index[-1] or 0 > index[-2] > index[-1]) or (index[-3] > 0 and index[-2] > index[-1] and 0 < index[-1] < 30):
+    elif (index[-2] > 0 > index[-1] or 0 >= index[-2] > index[-1]) or (index[-3] > 0 and index[-2] > index[-1] and 0 <= index[-1] < 30):
         if discriminate[-1] == '賣出':
             pass
         else:
